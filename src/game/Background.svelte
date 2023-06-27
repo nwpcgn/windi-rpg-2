@@ -69,7 +69,7 @@
 
 {#each bgs[set] as item, i}
 	<div
-		class="absolute inset-0 bg-no-repeat bg-center bg-cover transform transition-all duration-500 ease {i == active ? 'opacity-100 z-5' : 'opacity-0 z-1'}"
+		class="absolute inset-0 bg-no-repeat bg-bottom bg-cover transform transition-all rounded-lg duration-500 ease {i == active ? 'opacity-100 z-5' : 'opacity-0 z-1'}"
 		style="background-image: url(./img/sf/{item});" />
 {/each}
 <span class="absolute right-4 top-4 opacity-25">{active}</span>

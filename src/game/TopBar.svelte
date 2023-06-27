@@ -7,8 +7,8 @@
 </script>
 
 <header
-	class="flex items-end flex-col md:flex-row gap-1 p-2 bg-blue-500 shadow-lg">
-	<span class="label label-1">{formatCurr(game.total)}</span>
+	class="flex items-end flex-col md:flex-row gap-1 py-2 px-3 shadow-lg">
+	<span class="label label-1">{addcomma(game.total)} €</span>
 
 	<div class="flex items-center gap-2 ml-auto">
 		{#if game.meta.autosave}
@@ -22,10 +22,10 @@
 
 <style>
 	.label {
-		@apply px-2 py-1 rounded-md leading-tight bg-white border-2 border-blue-600;
+		@apply px-2 py-1 rounded-lg transform -skew-x-18 leading-tight border-3 border-r-20 text-blue-500 bg-blue-50 border-blue-500;
 	}
 	.label-1 {
-		@apply text-xl font-medium;
+		@apply text-xl font-medium -skew-x-20;
 	}
 	.label-2 {
 		@apply text-sm;

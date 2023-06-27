@@ -100,16 +100,16 @@
 			runtime: 0
 		}
 		game = { ...game, ...resetObj }
-		log(`Game Store resetted!`, `success`)
+		log(`Game Store resetted!`, `error`)
 	}
 	const saveStore = () => {
 		// game.runtime += $elapsed
 		$_game = { ...$_game, ...game }
-		log(`Game Store saved!`, `success`)
+		log(`Game Store saved!`, `success`, 1500)
 	}
 	const loadStore = () => {
 		game = { ...game, ...$_game }
-		log(`Game Store loaded!`, `success`)
+		log(`Game Store loaded!`, `success`, 1500)
 	}
 
 	function upgrade(slug) {
@@ -173,18 +173,18 @@
 				game.total >= game.upgrades[slug].cost &&
 				game.upgrades[slug].total < 50
 			) {
-				if (game.upgrades[slug].total <= 13) {
+				if (game.upgrades[slug].total <= 10) {
 					game.autoInc += game.upgrades[slug].autoInc
 					game.upgrades[slug].autoInc++
 					game.upgrades[slug].boost = 1
-				} else if (game.upgrades[slug].total == 14) {
+				} else if (game.upgrades[slug].total == 11) {
 					game.autoInc += game.upgrades[slug].autoInc
 					game.upgrades[slug].autoInc++
-					game.upgrades[slug].boost = 200
+					game.upgrades[slug].boost = 400
 				} else if (game.upgrades[slug].total <= 23) {
 					game.autoInc += 200 * game.upgrades[slug].autoInc
 					game.upgrades[slug].autoInc++
-					game.upgrades[slug].boost = 200
+					game.upgrades[slug].boost = 400
 				} else if (game.upgrades[slug].total == 24) {
 					game.autoInc += 200 * game.upgrades[slug].autoInc
 					game.upgrades[slug].autoInc++
@@ -262,7 +262,7 @@
 	}
 	function autoStep() {
 		intCount += 1
-
+		game.runtime += 1
 		if (intTimer > 0) {
 			intTimer -= 1
 		} else {
@@ -301,7 +301,6 @@
 		tick()
 	})
 	onDestroy(() => {
-		
 		saveStore()
 		clearInterval(intId1)
 		clearInterval(intId2)
@@ -309,13 +308,24 @@
 	})
 </script>
 
-
-
-<div class="absolute inset-0 overflow-hidden z-10 flex flex-col main-bg">
+<Background set={1} />
+<div class="absolute inset-0 overflow-hidden z-10 flex flex-col rounded-lg">
 	<TopBar bind:game bind:intTimer bind:intCount {addcomma} {formatCurr} />
 	<div class="flex-1 relative shadow overflow-hidden">
-		<Background set={1} />
 		<Route path="/">
+			<header
+				class="absolute z-25 top-2 left-2 rounded-md bg-white bg-opacity-80 shadow py-1 px-3">
+				<div class="font-bold mb-1 italic">Upgrades</div>
+				{#each Object.entries(game.upgrades) as [k, v]}
+					<div class="flex items-center justify-between gap-2">
+						<span class="italic text-sm font-light">{v.name}:</span>
+						<span
+							class="font-medium {v.cost <= game.total
+								? 'text-blue-600'
+								: ' text-red-600'}">{addcomma(v.cost)} €</span>
+					</div>
+				{/each}
+			</header>
 			<Start {handleClick} bind:isActive />
 		</Route>
 		<Route path="/1/*">

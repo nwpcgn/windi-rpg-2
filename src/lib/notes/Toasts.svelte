@@ -18,14 +18,13 @@
 <style>
   section {
     position: absolute;
-    top: 2rem;
-    right: 0;
+    top: 1rem;
+    right: 1rem;
     max-width: 560px;
     display: flex;
-    margin-top: 1rem;
     justify-content: end;
     flex-direction: column;
-    padding: 0.5rem;
+    padding: 0rem;
     gap: 0.4rem;
     z-index: 1000;
   }

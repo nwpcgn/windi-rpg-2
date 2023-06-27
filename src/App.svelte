@@ -1,4 +1,5 @@
 <script>
+	import Canvas2 from './Canvas2.svelte'
 	import Canvas1 from './Canvas1.svelte'
 	import Battle from './battle/Battle.svelte'
 	import Game from './game/Game.svelte'
@@ -12,12 +13,12 @@
 <main class="main">
 	<Route path="/game/*">
 		<section
-		class="flex-1 w-full max-w-5xl mx-auto relative shadow overflow-hidden">
+		class="flex-1 w-full max-w-5xl mx-auto my-4 relative overflow-hidden">
 		<Game />
 		</section>
 	</Route>
 	<Route path="/battle">
-		<Battle />
+		<Canvas2 />
 	</Route>
 	<Route path="/test">
 		<Canvas1 />
